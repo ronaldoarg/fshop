@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+  "-// Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.devMode" value="true" />
+    <package name="default" extends="struts-default">
+
+        <action name="cadastro">
+            <result>cadastro.jsp</result>
+        </action>
+                
+        <action name="entrar">
+            <result>entrar.jsp</result>
+        </action>        
+                
+        <action name="novousuario" class="actions.usuario.Novo">
+            <result name="listar" type="redirectAction">
+                <param name="actionName">listar</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+        
+        <action name="auth" class="actions.usuario.Auth">
+            <result name="success">index.jsp</result>
+            <result name="error">
+                <param name="actionName">entrar</param>
+                <param name="message">${message}</param>
+            </result>
+            <result name="listar" type="redirectAction">
+                <param name="actionName">listar</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+        
+        <action name="listar" class="actions.usuario.Listar">
+            <result name="listar">listar.jsp</result>
+        </action>
+        
+        <action name="novainteracao" class="actions.interacao.Nova">
+            <result name="success">success.json</result>
+        </action>
+        
+    </package>
+</struts>
