@@ -1,3 +1,10 @@
 .well-sidebar {
     padding: 0;
 }
+
+.welcome-user {
+    position: relative;
+    display: block;
+    color: #9d9d9d;
+    padding: 15px;
+}

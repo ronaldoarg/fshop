@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import util.GenericDAO;
 import util.HibernateUtil;
 
@@ -36,18 +37,22 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
         return cliente;
     }
     
-    public List<Usuario> getByUsername(String username) {
+   public Usuario getByUsername(String username, String password) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
-        Root<Usuario> rootUsuario = criteriaQuery.from(Usuario.class);
-        criteriaQuery.where(criteriaBuilder.like(criteriaBuilder.lower(rootUsuario.get("username")), "%" + username.toLowerCase() + "%"));
-        List<Usuario> list = (List<Usuario>) session.createQuery(criteriaQuery).getResultList();
+        Query query = session.createQuery("from Usuario u where u.username = :username and u.password = :password");
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        Usuario u = null;
+        try {
+            u = (Usuario) query.getSingleResult();
+        } catch (Exception ex) {
+            u = null;
+        }
         transaction.commit();
         session.close();
-        return list;
+        return u;
     }
     
 }

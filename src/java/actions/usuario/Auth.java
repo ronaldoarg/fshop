@@ -5,9 +5,11 @@
  */
 package actions.usuario;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entidades.usuario.Usuario;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -47,18 +49,27 @@ public class Auth extends ActionSupport {
     @Override
     public String execute() throws Exception {
         
-        UsuarioDAO clienteDAO = new UsuarioDAO();
-        
-        usuarioList = clienteDAO.getByUsername(usuario.getUsername());
-        
-        for (int i = 0; i < usuarioList.size(); i++) {
-            if(usuario.getUsername() == null ? usuarioList.get(i).getUsername() == null : usuario.getUsername().equals(usuarioList.get(i).getUsername())) {
-                setMessage("Login realizado com sucesso");
-                usuario = usuarioList.get(i);
-                return "success";
-            }
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario u = usuarioDAO.getByUsername(usuario.getUsername(), usuario.getPassword());
+        if (u != null) {
+            Map<String, Object> session = ActionContext.getContext().getSession();
+            session.put("usuario.name", u.getName());
+            session.put("usuario.lastname", u.getLastname());
+            session.put("usuario.id", u.getId());
+            return "success";
+        } else {
+            setMessage("Dados Inválidos. Tente Novamente");
+            return "error";
         }
-        setMessage("Usuario não encontrado");
-        return "error";
+    }
+    
+    public String logout() throws Exception {
+        
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        session.put("usuario.name", "");
+        session.put("usuario.lastname", "");
+        session.put("usuario.id", "");
+        
+        return "success";
     }
 }

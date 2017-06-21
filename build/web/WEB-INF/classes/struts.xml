@@ -16,22 +16,17 @@
         </action>        
                 
         <action name="novousuario" class="actions.usuario.Novo">
-            <result name="listar" type="redirectAction">
-                <param name="actionName">listar</param>
-                <param name="message">${message}</param>
-            </result>
+            <result name="success">entrar.jsp</result>
+            <result name="error">cadastro.jsp</result>
         </action>
         
         <action name="auth" class="actions.usuario.Auth">
             <result name="success">index.jsp</result>
-            <result name="error">
-                <param name="actionName">entrar</param>
-                <param name="message">${message}</param>
-            </result>
-            <result name="listar" type="redirectAction">
-                <param name="actionName">listar</param>
-                <param name="message">${message}</param>
-            </result>
+            <result name="error">entrar.jsp</result>
+        </action>
+        
+        <action name="sair" class="actions.usuario.Auth" method="logout">
+            <result name="success">index.jsp</result>
         </action>
         
         <action name="listar" class="actions.usuario.Listar">
