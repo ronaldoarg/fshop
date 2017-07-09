@@ -8,8 +8,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <h2 class="text-center">Novo usu√°rio<br><br>
+        <div class="col-md-4 col-md-offset-4 well">
+            <h2 class="text-center">Novo usu·rio<br><br>
             <small>Informe seus dados abaixo</small></h2><br><br>
             <form action="novousuario" method="POST">
                 <div class="form-group">

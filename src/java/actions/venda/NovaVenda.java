@@ -66,19 +66,15 @@ public class NovaVenda extends ActionSupport {
                 vendaproduto.add(temp);
             }
             
-            System.out.println(produtos);
-            System.out.println(venda.getCodigo());
-
             venda.setCliente(cliente);
             venda.setProdutos(vendaproduto);
 
-            //venda.setProdutos(carrinhoList); ??????
-            
-            GenericDAO<Venda> dao = new GenericDAO(Venda.class);
+/*          GenericDAO<Venda> dao = new GenericDAO(Venda.class);
             venda.setDataHora(new Date());
             Serializable newId = dao.save(venda);
-            
+*/          
             setMessage("Compra realizada com sucesso");
+            session.put("carrinhoList", null);
             
             return "success";
         } else {

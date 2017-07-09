@@ -48,6 +48,6 @@ public class Listar extends ActionSupport {
     public String execute() throws Exception {
         GenericDAO<Usuario> dao = new GenericDAO(Usuario.class);
         usuarioList = dao.getAll();
-        return "listar";
+        return "success";
     }
 }

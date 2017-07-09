@@ -25,13 +25,21 @@
             <result>admin/index.jsp</result>
         </action> 
         
-        <action name="clientes">
-            <result>clientes.jsp</result>
+        <action name="clientes" class="actions.usuario.Listar">
+            <result name="success">clientes.jsp</result>
         </action>        
                 
         <action name="novousuario" class="actions.usuario.Novo">
             <result name="success">entrar.jsp</result>
             <result name="error">cadastro.jsp</result>
+        </action>
+        
+        <action name="minhaconta" class="actions.usuario.Conta">
+            <result name="conta">minhaconta.jsp</result>
+        </action>
+        
+        <action name="deleteuser" class="actions.usuario.Conta" method="delete">
+            <result name="success" type="redirectAction">home</result>
         </action>
         
         <action name="auth" class="actions.usuario.Auth">
@@ -42,10 +50,6 @@
         
         <action name="sair" class="actions.usuario.Auth" method="logout">
             <result name="success">index.jsp</result>
-        </action>
-        
-        <action name="listar" class="actions.usuario.Listar">
-            <result name="listar">listar.jsp</result>
         </action>
         
         <!-- Interação Actions -->      
