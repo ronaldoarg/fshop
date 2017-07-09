@@ -2,7 +2,8 @@
 	var params = "interacao.field="+field+"&interacao.text="+value+"&interacao.user_id="+user_id;    
 	$.post("novainteracao", params)
 		.done(function(response) {
-			console.log("success");
+			console.log("success");			console.log(response);
+
 		})
 		.fail(function() {
 			console.log("error");

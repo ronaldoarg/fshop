@@ -10,14 +10,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import entidades.interacao.Interacao;
 import java.io.Serializable;
 import java.util.Map;
-import org.apache.struts2.interceptor.SessionAware;
 import util.GenericDAO;
 
 /**
  *
  * @author ronaldoarg
  */
-public class Nova extends ActionSupport implements SessionAware {
+public class Nova extends ActionSupport {
     private Interacao interacao;
 
     public Interacao getInteracao() {
@@ -40,11 +39,6 @@ public class Nova extends ActionSupport implements SessionAware {
         }
         
         return "success";
-    }
-
-    @Override
-    public void setSession(Map<String, Object> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

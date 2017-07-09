@@ -40,7 +40,7 @@ public class Novo extends ActionSupport {
         GenericDAO<Usuario> dao = new GenericDAO(Usuario.class);
         Serializable newId = dao.save(usuario);
         setMessage("Cadastro realizado com sucesso");
-        return "listar";
+        return "success";
     }
     
     

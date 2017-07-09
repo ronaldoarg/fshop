@@ -10,13 +10,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import entidades.usuario.Usuario;
 import java.util.List;
 import java.util.Map;
-import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
  * @author ronaldoarg
  */
-public class Auth extends ActionSupport implements SessionAware  {
+public class Auth extends ActionSupport {
     
     private Usuario usuario;
     private String message;
@@ -59,7 +58,11 @@ public class Auth extends ActionSupport implements SessionAware  {
             session.put("usuario.lastname", u.getLastname());
             session.put("usuario.id", u.getId());
             
-            return "success";
+            if(u.getPermission()) {
+                return "admin";
+            } else {
+                return "success";
+            }
             
         } else {
             setMessage("Dados Inválidos. Tente Novamente");
@@ -77,8 +80,4 @@ public class Auth extends ActionSupport implements SessionAware  {
         return "success";
     }
 
-    @Override
-    public void setSession(Map<String, Object> map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -1,3 +1,6 @@
+.btn a {
+    color: #fff !important;
+}
 .well-sidebar {
     padding: 0;
 }
@@ -7,4 +10,21 @@
     display: block;
     color: #9d9d9d;
     padding: 15px;
+}
+
+.nav__admin {
+    margin-bottom: 30px;
+}
+
+.page-header--admin .title {
+    display: inline-block;
+}
+
+.page-header--admin .btn {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.pagination {
+    margin: 0;
 }

@@ -6,13 +6,27 @@
     <constant name="struts.ui.theme" value="simple" />
     <constant name="struts.devMode" value="true" />
     <package name="default" extends="struts-default">
-
+        
+        
+        <action name="home" class="actions.produto.Listar">
+            <result>home.jsp</result>
+        </action>
+        
+        <!-- Usuario Actions -->
         <action name="cadastro">
             <result>cadastro.jsp</result>
         </action>
                 
         <action name="entrar">
             <result>entrar.jsp</result>
+        </action> 
+        
+        <action name="admin">
+            <result>admin/index.jsp</result>
+        </action> 
+        
+        <action name="clientes">
+            <result>clientes.jsp</result>
         </action>        
                 
         <action name="novousuario" class="actions.usuario.Novo">
@@ -22,6 +36,7 @@
         
         <action name="auth" class="actions.usuario.Auth">
             <result name="success">index.jsp</result>
+            <result name="admin">admin/index.jsp</result>
             <result name="error">entrar.jsp</result>
         </action>
         
@@ -33,8 +48,45 @@
             <result name="listar">listar.jsp</result>
         </action>
         
+        <!-- Interação Actions -->      
         <action name="novainteracao" class="actions.interacao.Nova">
             <result name="success">success.json</result>
+        </action>
+        
+        <!-- Produto Actions -->
+        <action name="cadastroproduto">
+            <result>cadastroproduto.jsp</result>
+        </action>
+        
+        <action name="novoproduto" class="actions.produto.Novo">
+            <result name="success">cadastroproduto.jsp</result>
+        </action>
+        
+        <action name="produtos" class="actions.produto.Listar">
+            <result name="success">produtos.jsp</result>
+        </action>
+                
+        <!-- Carrinho Actions -->
+        <action name="carrinho" class="actions.produto.Carrinho">
+            <result name="success">carrinho.jsp</result>
+        </action>
+        
+        <action name="carrinhoadd" class="actions.produto.Carrinho" method="adiciona">
+            <result name="success">carrinho.jsp</result>
+        </action>
+        
+        <action name="carrinhoremove" class="actions.produto.Carrinho" method="remove">
+            <result name="success">carrinho.jsp</result>
+        </action>
+        
+        <action name="carrinhodelete" class="actions.produto.Carrinho" method="removeAll">
+            <result name="success">carrinho.jsp</result>
+        </action>
+        
+        <!-- Venda Actions -->
+        <action name="novaVenda" class="actions.venda.NovaVenda">
+            <result name="login">entrar.jsp</result>            
+            <result name="success">comprafinalizada.jsp</result>
         </action>
         
     </package>

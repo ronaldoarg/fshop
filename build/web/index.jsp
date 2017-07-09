@@ -4,9 +4,9 @@
     Author     : ronaldoarg
 --%>
 
-<%@include file="header.jsp" %>
-<%@include file="home.jsp" %>
-<%@include file="footer.jsp" %>
+<script>
+    window.location.href = 'home';
+</script>
 
 
        

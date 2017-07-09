@@ -13,7 +13,8 @@
         
         <!-- Mapping - Begin -->
         <mapping class="entidades.usuario.Usuario"></mapping>        
-        <mapping class="entidades.interacao.Interacao"></mapping>
+        <mapping class="entidades.interacao.Interacao"></mapping>    
+        <mapping class="entidades.produto.Produto"></mapping>
 
         <!-- Mapping - End -->
     </session-factory>
