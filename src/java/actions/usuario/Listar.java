@@ -5,9 +5,11 @@
  */
 package actions.usuario;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entidades.usuario.Usuario;
 import java.util.List;
+import java.util.Map;
 import util.GenericDAO;
 
 /**
@@ -48,6 +50,9 @@ public class Listar extends ActionSupport {
     public String execute() throws Exception {
         GenericDAO<Usuario> dao = new GenericDAO(Usuario.class);
         usuarioList = dao.getAll();
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        UsuarioDAO udao = new UsuarioDAO();
+        setUsuario(udao.getByCodigo((Integer) session.get("usuario.id"))); 
         return "success";
     }
 }

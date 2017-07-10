@@ -57,6 +57,7 @@ public class Auth extends ActionSupport {
             session.put("usuario.name", u.getName());
             session.put("usuario.lastname", u.getLastname());
             session.put("usuario.id", u.getId());
+            session.put("usuario.permission", u.getPermission());
             
             if(u.getPermission()) {
                 return "admin";

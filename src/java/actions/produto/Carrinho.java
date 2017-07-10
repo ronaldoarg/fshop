@@ -5,13 +5,16 @@
  */
 package actions.produto;
 
+import actions.usuario.UsuarioDAO;
 import com.opensymphony.xwork2.ActionSupport;
 import entidades.produto.Produto;
 import java.util.List;
 import com.opensymphony.xwork2.ActionContext;
+import entidades.usuario.Usuario;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Map;
+import util.GenericDAO;
 
 /**
  *
@@ -26,6 +29,16 @@ public class Carrinho extends ActionSupport {
     private Integer id;
     
     private Double total = 0.0;
+    
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public List<Produto> getCarrinhoList() {
         return carrinhoList;
@@ -185,7 +198,21 @@ public class Carrinho extends ActionSupport {
     public String execute() throws Exception {
         if(session.get("carrinhoList") != null) {
             setCarrinhoList((List<Produto>) session.get("carrinhoList"));
-        } 
+        }
+        
+        UsuarioDAO dao = new UsuarioDAO();
+        Usuario u = dao.getByCodigo((Integer) session.get("usuario.id"));
+        
+        System.out.println(session.get("usuario.id"));
+        System.out.println(u);
+        System.out.println(u.getPermission());
+
+        
+        if(u.getPermission()) {
+            setMessage("Usuarios administradores não podem realizar compras");
+            System.out.println("adm");
+        }
+        
         calculaTotal();
         return "success";
     }

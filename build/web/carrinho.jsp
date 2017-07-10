@@ -12,8 +12,12 @@
 <div class="container">
     <!-- CONTENT -->
     <div class="col-md-12 well">
-        <h1>Carrinho</h1>
+        <h1>Carrinho</h1><hr>
         
+        <s:if test="message != null">
+            <div class="alert alert-danger" role="alert"><s:property value="message"/></div>
+        </s:if>
+        <s:else>
         <s:if test="carrinhoList != null && carrinhoList.size() > 0">
             <table class="table table-striped table-bordered">
                 <thead>
@@ -79,9 +83,10 @@
         <s:else>
             <div class="alert alert-danger" role="alert">O seu carrinho está vazio</div>
             <button class="btn"><a href="<%= request.getContextPath() %>/home"><span class="glyphicon glyphicon-arrow-left"></span> Continuar comprando</a></button>                
-            <button class="btn btn-primary pull-right disabled">Finalizar compra</button>
         </s:else> 
-         
+        </s:else> 
+        <button class="btn"><a href="<%= request.getContextPath() %>/home"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a></button>                
+        <button class="btn btn-primary pull-right disabled">Finalizar compra</button>
     </div>
 </div>
 

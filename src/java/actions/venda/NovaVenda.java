@@ -61,6 +61,7 @@ public class NovaVenda extends ActionSupport {
             while(loop.hasNext()) {                
                 VendaProduto temp = new VendaProduto();
                 Produto p = loop.next();
+                temp.setVenda(venda);
                 temp.setProduto(p);
                 temp.setQuantidade(p.getQuantidade());
                 vendaproduto.add(temp);
@@ -69,10 +70,10 @@ public class NovaVenda extends ActionSupport {
             venda.setCliente(cliente);
             venda.setProdutos(vendaproduto);
 
-/*          GenericDAO<Venda> dao = new GenericDAO(Venda.class);
+            GenericDAO<Venda> dao = new GenericDAO(Venda.class);
             venda.setDataHora(new Date());
             Serializable newId = dao.save(venda);
-*/          
+          
             setMessage("Compra realizada com sucesso");
             session.put("carrinhoList", null);
             

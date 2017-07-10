@@ -38,7 +38,11 @@
                             <li><a href="<%= request.getContextPath() %>/entrar">Login <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a></li>
                         <%} else { %>
                             <li class="welcome-user"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bem vindo, <%= session.getAttribute("usuario.name") %> <%= session.getAttribute("usuario.lastname") %></li>
-                            <li><a href="<%= request.getContextPath() %>/minhaconta">Minha Conta <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> </a></li>
+                            <% if(session.getAttribute("usuario.permission") == "true") { %>
+                                <li><a href="<%= request.getContextPath() %>/admin/pedidos">Minha Conta <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> </a></li>
+                            <%} else { %>
+                                <li><a href="<%= request.getContextPath() %>/minhaconta">Minha Conta <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> </a></li>
+                            <% } %>
                             <li><a href="<%= request.getContextPath() %>/carrinho">Carrinho <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> </a></li>
                             <li><a href="<%= request.getContextPath() %>/sair">Logout <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
                        <% } %>

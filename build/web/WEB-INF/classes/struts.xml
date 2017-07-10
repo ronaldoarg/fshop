@@ -12,6 +12,16 @@
             <result>home.jsp</result>
         </action>
         
+        <!-- Admin Actions -->
+        <action name="pedidos" class="actions.venda.Listar">
+            <result name="success">index.jsp</result>
+        </action>
+        
+        <action name="admin" class="actions.venda.Listar">
+            <result type="redirectAction">pedidos</result>
+        </action>
+        
+        
         <!-- Usuario Actions -->
         <action name="cadastro">
             <result>cadastro.jsp</result>
@@ -19,10 +29,6 @@
                 
         <action name="entrar">
             <result>entrar.jsp</result>
-        </action> 
-        
-        <action name="admin">
-            <result>admin/index.jsp</result>
         </action> 
         
         <action name="clientes" class="actions.usuario.Listar">
@@ -44,7 +50,7 @@
         
         <action name="auth" class="actions.usuario.Auth">
             <result name="success">index.jsp</result>
-            <result name="admin">admin/index.jsp</result>
+            <result name="admin" type="redirectAction">admin/pedidos</result>
             <result name="error">entrar.jsp</result>
         </action>
         
@@ -73,6 +79,7 @@
         <!-- Carrinho Actions -->
         <action name="carrinho" class="actions.produto.Carrinho">
             <result name="success">carrinho.jsp</result>
+            <result name="admin">carrinho.jsp</result>
         </action>
         
         <action name="carrinhoadd" class="actions.produto.Carrinho" method="adiciona">

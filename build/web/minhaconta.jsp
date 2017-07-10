@@ -11,7 +11,8 @@
 
     <div class="well container">
         
-        
+        <h1>Minha Conta</h1><hr>
+
         <img src="https://tracker.moodle.org/secure/attachment/30912/f3.png" alt="<s:property value="usuario.getName()"/> <s:property value="usuario.getLastname()"/>" class="img-circle col-md-2 img-responsive">
         
         <h1><s:property value="usuario.getName()"/> <s:property value="usuario.getLastname()"/></h1>

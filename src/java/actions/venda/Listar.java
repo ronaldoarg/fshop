@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package actions.produto;
+package actions.venda;
 
 import actions.usuario.UsuarioDAO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import entidades.produto.Produto;
 import entidades.usuario.Usuario;
+import entidades.venda.Venda;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import util.GenericDAO;
@@ -20,16 +21,15 @@ import util.GenericDAO;
  */
 public class Listar extends ActionSupport {
     
-    private List<Produto> produtoList;
+    private List<Venda> vendas = new ArrayList<>();
     private Usuario usuario;
-    private String message;
-    
-    public List<Produto> getProdutoList() {
-        return produtoList;
+
+    public List<Venda> getVendas() {
+        return vendas;
     }
 
-    public void setProdutoList(List<Produto> produtoList) {
-        this.produtoList = produtoList;
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
     }
 
     public Usuario getUsuario() {
@@ -40,26 +40,18 @@ public class Listar extends ActionSupport {
         this.usuario = usuario;
     }
     
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     @Override
     public String execute() throws Exception {
-        GenericDAO dao = new GenericDAO(Produto.class);
-        produtoList = dao.getAll();
         Map<String, Object> session = ActionContext.getContext().getSession();
-        UsuarioDAO udao = new UsuarioDAO();
         
-        if(session.get("usuario.id") != null && !session.get("usuario.id").equals("")) {
-            setUsuario(udao.getByCodigo((Integer) session.get("usuario.id"))); 
-        }
-      
+        GenericDAO dao = new GenericDAO(Venda.class);
+        setVendas(dao.getAll());
+        
+        System.out.println(session.get("usuario.id"));
+        
+        UsuarioDAO udao = new UsuarioDAO();
+        setUsuario(udao.getByCodigo((Integer) session.get("usuario.id")));
+        
         return "success";
     }
-    
 }

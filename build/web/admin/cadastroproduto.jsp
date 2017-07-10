@@ -6,10 +6,11 @@
 <%@include file="../header.jsp" %>
 <div class="container">
     <!-- CONTENT -->
-    <div class="col-md-12 well">
+    <%@include file="conta.jsp" %>
+    <div class="container well">
         <nav class="nav__admin">
             <ul class="nav nav-tabs nav-justified">
-               <li role="presentation"><a href="<%= request.getContextPath() %>/admin">Compras</a></li>
+               <li role="presentation"><a href="<%= request.getContextPath() %>/admin/pedidos">Pedidos</a></li>
                <li role="presentation" class="active"><a href="<%= request.getContextPath() %>/admin/produtos">Produtos</a></li>
                <li role="presentation"><a href="<%= request.getContextPath() %>/admin/clientes">Clientes</a></li>
              </ul>

@@ -15,6 +15,9 @@
         <mapping class="entidades.usuario.Usuario"></mapping>        
         <mapping class="entidades.interacao.Interacao"></mapping>    
         <mapping class="entidades.produto.Produto"></mapping>
+        <mapping class="entidades.venda.Venda"></mapping>
+        <mapping class="entidades.vendaproduto.VendaProduto"></mapping>
+
 
         <!-- Mapping - End -->
     </session-factory>

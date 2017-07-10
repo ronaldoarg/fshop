@@ -34,25 +34,25 @@ public class Venda implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codigo;
+    private Integer id_venda;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_codigo", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario cliente;
 
-    @OneToMany(mappedBy = "venda", targetEntity = VendaProduto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venda", targetEntity = VendaProduto.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<VendaProduto> produtos;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_hora", nullable = false)
     private Date dataHora;
 
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getId_venda() {
+        return id_venda;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setId_venda(Integer id_venda) {
+        this.id_venda = id_venda;
     }
 
     public Usuario getCliente() {
