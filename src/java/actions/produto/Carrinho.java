@@ -200,17 +200,14 @@ public class Carrinho extends ActionSupport {
             setCarrinhoList((List<Produto>) session.get("carrinhoList"));
         }
         
-        UsuarioDAO dao = new UsuarioDAO();
-        Usuario u = dao.getByCodigo((Integer) session.get("usuario.id"));
-        
-        System.out.println(session.get("usuario.id"));
-        System.out.println(u);
-        System.out.println(u.getPermission());
-
-        
-        if(u.getPermission()) {
-            setMessage("Usuarios administradores não podem realizar compras");
-            System.out.println("adm");
+        if(session.get("usuario.id") != null) {
+            UsuarioDAO dao = new UsuarioDAO();
+            Usuario u = dao.getByCodigo((Integer) session.get("usuario.id"));
+   
+            if(u.getPermission()) {
+                setMessage("Usuarios administradores não podem realizar compras");
+                System.out.println("adm");
+            }
         }
         
         calculaTotal();

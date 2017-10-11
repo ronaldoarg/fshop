@@ -15,7 +15,8 @@
         <nav class="navbar navbar-default">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" id="main-menu"> 
-                    <li class="active"><a href="#">Roupas</a></li>
+                    <li class="active"><a href="#">Todos os produtos</a></li>
+                    <li><a href="#">Roupas</a></li>
                     <li><a href="#">Calçados</a></li>
                     <li><a href="#">Acessórios</a></li>
                 </ul>
