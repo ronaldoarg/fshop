@@ -20,11 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import util.GenericDAO;
-import util.HibernateUtil;
 
 import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
@@ -69,11 +65,11 @@ public class NovaVenda extends ActionSupport {
 
         // Clusterização dos produtos da venda
         SimpleKMeans saleProductsKmeans = new SimpleKMeans();
-        saleProductsKmeans.setSeed(10);
+        // saleProductsKmeans.setSeed(100);
         saleProductsKmeans.setPreserveInstancesOrder(true);
         saleProductsKmeans.setNumClusters(1);
         
-        String saleProductsQueryString = "SELECT name, categoria, cor, genero, tamanho, preco FROM public.produto JOIN public.venda_produto ON public.venda_produto.id_venda = "+venda_id+" AND public.venda_produto.id_produto = public.produto.id";
+        String saleProductsQueryString = "SELECT name, categoria, autor, editora FROM public.produto JOIN public.venda_produto ON public.venda_produto.id_venda = "+venda_id+" AND public.venda_produto.id_produto = public.produto.id";
         InstanceQuery saleProductsQuery = new InstanceQuery();
         File reader = new File("DatabaseUtils.props");
         saleProductsQuery.setUsername("ronaldoarg");
@@ -88,13 +84,13 @@ public class NovaVenda extends ActionSupport {
         
         // Centroid do Cluster com os produtos da venda realizada
         Instances saleProductCentroids = saleProductsKmeans.getClusterCentroids();
-        
+
         // Clusterização de todos os produtos do sistema
         SimpleKMeans allProductsKmeans = new SimpleKMeans();
-        allProductsKmeans.setSeed(100);
+        // allProductsKmeans.setSeed(100);
         allProductsKmeans.setPreserveInstancesOrder(true);
         
-        String allProductsQueryString = "SELECT name, categoria, cor, genero, tamanho, preco FROM public.produto ORDER BY id DESC";
+        String allProductsQueryString = "SELECT name, categoria, autor, editora FROM public.produto ORDER BY id DESC";
         InstanceQuery allProductsQuery = new InstanceQuery();
         allProductsQuery.setUsername("ronaldoarg");
         allProductsQuery.setPassword("");
@@ -107,16 +103,22 @@ public class NovaVenda extends ActionSupport {
         allProductsKmeans.setNumClusters(allProductsInstances.numInstances()/2);
         allProductsKmeans.buildClusterer(allProductsInstances);        
         
-        System.out.println("O Centroid do cluster de vendas está no cluster : "+allProductsKmeans.clusterInstance(saleProductCentroids.instance(0))+" de todos os produtos");
-        
-        
         int[] allProductsAssignments = allProductsKmeans.getAssignments();
         List<Integer> allProductsInstacesIdsToRecommender = new ArrayList<Integer>();
+        int saleInstanceIndex = 0;
+
+        for(int r = 0; r < allProductsInstances.size(); ++r) {
+            if(allProductsInstances.get(r).stringValue(0).equals(saleProductCentroids.instance(0).attribute(0).value(0))) {
+                saleInstanceIndex = r;
+            }
+        }
+        
+        int clusterNumberToRecommender = allProductsAssignments[saleInstanceIndex];
         
         int i = 0;
         int count = 0;
         for(int clusterNum : allProductsAssignments) {
-            if(clusterNum == allProductsKmeans.clusterInstance(saleProductCentroids.instance(0))) {
+            if(clusterNum == clusterNumberToRecommender) {
                 allProductsInstacesIdsToRecommender.add(i);
                 count++;
             }

@@ -11,8 +11,8 @@
 
 <div class="container">
     <!-- CONTENT -->
-    <div class="col-md-9 well">
-        <nav class="navbar navbar-default">
+    <div class="col-md-12 well">
+        <nav class="navbar navbar-default hidden">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" id="main-menu"> 
                     <li class="active"><a href="#">Todos os produtos</a></li>
@@ -32,16 +32,21 @@
         </nav>
             
         <s:if test="produtoList != null && produtoList.size() > 0">
-            <s:iterator value="produtoList" var="c">
-                <div class="col-md-4 product">  
+            <div class="row">
+            <s:iterator value="produtoList" var="c" status="id">                
+                <div class="col-md-3 product">  
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><s:property value="#c.getName()" /></h3>
                         </div>
                         <div class="panel-body">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Blue_Tshirt.jpg" alt="Blusa Azul" class="img-responsive"/>
+                            <img src="http://www.attali.com/wp-content/plugins/mybooktable/images/book-placeholder.jpg" alt="Blusa Azul" class="img-responsive"/>
                         </div>
                         <div class="panel-footer">
+                            <span><s:property value="#c.getAutor()" /></span><br>
+                            <span><s:property value="#c.getCategoria()" /></span><br>
+                            <span>Editora <s:property value="#c.getEditora()" /></span><br>
+                            <hr>
                             <span>R$ <s:property value="#c.getPreco()" /></span>
                             <button class="btn btn-xs btn-primary pull-right button-buy">
                                 <a href="<%= request.getContextPath() %>/carrinhoadd?id=<s:property value="#c.getId()" />">Comprar</a>
@@ -50,14 +55,12 @@
                     </div>
 		</div>
             </s:iterator>
+            </div>
         </s:if>
         <s:else>
             <div class="alert alert-danger" role="alert">Nenhum produto cadastrado</div>
         </s:else>    	
     </div>
-
-    <!-- SIDEBAR -->
-    <%@include file="sidebar.jsp" %>
 
 </div>
 

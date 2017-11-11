@@ -28,9 +28,24 @@ public class Produto implements Serializable {
     private String name;
     private Integer quantidade;    
     private Double preco;
-    private String cor;
-    private String tamanho;
-    private String genero;
+    private String autor;
+    private String editora;
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
     private String categoria;
 
     public Integer getId() {
@@ -63,30 +78,6 @@ public class Produto implements Serializable {
 
     public void setPreco(Double preco) {
         this.preco = preco;
-    }
-
-    public String getCor() {
-        return cor;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-    public String getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(String tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public String getCategoria() {
